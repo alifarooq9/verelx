@@ -57,7 +57,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html className="dark " lang="en">
-			<body className={cn(font.variable, "tracking-tight")}>
+			<body className={cn(font.variable, "tracking-normal")}>
 				{children}
 			</body>
 		</html>
