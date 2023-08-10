@@ -54,6 +54,7 @@
 @layer base {
 	* {
 		@apply border-border;
+		font-family: var(--local-font);
 	}
 	body {
 		@apply bg-background text-foreground;
