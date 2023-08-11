@@ -6,7 +6,7 @@ import { buttonVariants } from "../ui/button";
 
 const WebHeader: FC = () => {
 	return (
-		<header className="w-full h-14 border-b flex items-center">
+		<header className="w-full sticky top-0 h-14 border-b flex items-center">
 			<nav className="mx-auto container  flex justify-between items-center">
 				<div className="flex items-center space-x-4">
 					<Link
@@ -65,7 +65,7 @@ const WebHeader: FC = () => {
 
 				<div className="flex justify-between space-x-3 items-center">
 					<Link
-						href="/auth/login"
+						href="/auth"
 						className={cn(
 							buttonVariants({ variant: "secondary", size: "sm" })
 						)}
@@ -73,7 +73,7 @@ const WebHeader: FC = () => {
 						Login
 					</Link>
 					<Link
-						href="/auth/register"
+						href="/auth "
 						className={cn(
 							buttonVariants({ variant: "default", size: "sm" })
 						)}
