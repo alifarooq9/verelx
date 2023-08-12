@@ -1,17 +1,35 @@
-import type { NextAuthOptions } from "next-auth";
+import type { DefaultSession, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { env } from '@/lib/env/server'
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "./db";
+import { Adapter } from "node_modules/next-auth/adapters";
+
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: DefaultSession["user"] & {
+      id: string;
+      // ...other properties
+      // role: UserRole;
+    };
+  }
+
+  // interface User {
+  //   // ...other properties
+  //   // role: UserRole;
+  // }
+}
 
 export const authOptions: NextAuthOptions = {
-    pages: {
-        signIn: '/auth'
-    },
-    session: {
-        strategy: "jwt",
-    },
-    providers: [
-        GoogleProvider({
-        clientId: '647783362803-brlmsbmgpp52pf30o12v1v20b465pnpo.apps.googleusercontent.com',
-        clientSecret: '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',
-        }),
-    ],
+  session: {
+    strategy: 'jwt'
+  },
+  secret: env.NEXTAUTH_SECRET,
+  adapter: PrismaAdapter(prisma) as Adapter,
+  providers: [
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
 };

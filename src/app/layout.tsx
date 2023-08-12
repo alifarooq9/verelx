@@ -3,7 +3,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
-import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
