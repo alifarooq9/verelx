@@ -2,6 +2,8 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Providers from "@/components/providers";
+import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -50,7 +52,7 @@ const font = localFont({
 	variable: "--local-font",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
@@ -58,7 +60,7 @@ export default function RootLayout({
 	return (
 		<html className="dark " lang="en">
 			<body className={cn(font.variable, "tracking-normal")}>
-				{children}
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
