@@ -1,9 +1,10 @@
+import { redirectProtectedRoutes } from "@/lib/redirect-routes";
 import { getServerSession } from "next-auth";
-import { getSession } from "next-auth/react";
 
 const DashboardPage = async () => {
 	const session = await getServerSession();
-	console.log("session", session);
+
+	await redirectProtectedRoutes({ session, url: "/auth" });
 
 	return (
 		<div>

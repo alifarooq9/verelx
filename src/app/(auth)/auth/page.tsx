@@ -2,9 +2,17 @@ import UserAuthForm from "@/components/auth/user-auth-form";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MaximizeIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const Register = () => {
+const AuthPage = async () => {
+	const session = await getServerSession();
+
+	if (session) {
+		redirect("/dashboard");
+	}
+
 	return (
 		<div className="mx-auto w-full">
 			<main className="min-h-screen grid grid-cols-1 xl:grid-cols-2">
@@ -34,4 +42,4 @@ const Register = () => {
 	);
 };
 
-export default Register;
+export default AuthPage;

@@ -1,6 +1,6 @@
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { env } from '@/lib/env/server'
+import { env } from '@/env/server'
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db";
 import { Adapter } from "node_modules/next-auth/adapters";
