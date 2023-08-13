@@ -1,14 +1,13 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2, MaximizeIcon } from "lucide-react";
-import Link from "next/link";
 
-const AuthPageLoading = () => {
+const AuthPageLoading = async () => {
 	return (
 		<div className="mx-auto w-full">
 			<main className="min-h-screen grid grid-cols-1 xl:grid-cols-2">
-				<div className="w-full p-6 sm:p-14">
-					<Link
+				<section className="w-full p-6 sm:p-14">
+					<a
 						href="/"
 						className={cn(
 							buttonVariants({
@@ -23,13 +22,13 @@ const AuthPageLoading = () => {
 							strokeWidth={2}
 						/>
 						<span className="font-bold text-xl">Verelx</span>
-					</Link>
+					</a>
 					<div className="w-full max-w-sm mx-auto flex justify-center flex-col items-center h-full">
 						<Loader2 className="animate-spin" />
 					</div>
-				</div>
+				</section>
 
-				<div className="w-full bg-secondary opacity-50 sm:p-10 hidden xl:block"></div>
+				<aside className="w-full bg-secondary opacity-50 sm:p-10 hidden xl:block"></aside>
 			</main>
 		</div>
 	);

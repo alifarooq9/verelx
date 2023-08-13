@@ -1,14 +1,18 @@
 import Link from "next/link";
-import { FC } from "react";
 import { MaximizeIcon, LogInIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
+import { getServerSession } from "next-auth";
+import { Fragment } from "react";
+import UserDropDown from "../auth/user-dropdown";
 
-const WebHeader: FC = () => {
+const WebHeader = async () => {
+	const session = await getServerSession();
+
 	return (
 		<header className="w-full sticky top-0 h-14 border-b flex items-center">
-			<nav className="mx-auto container  flex justify-between items-center">
-				<div className="flex items-center space-x-4">
+			<div className="mx-auto container  flex justify-between items-center">
+				<section className="flex items-center space-x-4">
 					<Link
 						href="/"
 						className={cn(
@@ -25,63 +29,82 @@ const WebHeader: FC = () => {
 						/>
 						<span className="font-bold text-xl">Verelx</span>
 					</Link>
+					<nav>
+						<ul className="flex items-center">
+							<li>
+								<Link
+									href="/"
+									className={cn(
+										buttonVariants({
+											size: "sm",
+											variant: "link2",
+										})
+									)}
+								>
+									Features
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/"
+									className={cn(
+										buttonVariants({
+											size: "sm",
+											variant: "link2",
+										})
+									)}
+								>
+									Pricing
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/"
+									className={cn(
+										buttonVariants({
+											size: "sm",
+											variant: "link2",
+										})
+									)}
+								>
+									Testimonials
+								</Link>
+							</li>
+						</ul>
+					</nav>
+				</section>
 
-					<div className="flex items-center">
-						<Link
-							href="/"
-							className={cn(
-								buttonVariants({
-									size: "sm",
-									variant: "link2",
-								})
-							)}
-						>
-							Features
-						</Link>
-						<Link
-							href="/"
-							className={cn(
-								buttonVariants({
-									size: "sm",
-									variant: "link2",
-								})
-							)}
-						>
-							Testimonials
-						</Link>
-						<Link
-							href="/"
-							className={cn(
-								buttonVariants({
-									size: "sm",
-									variant: "link2",
-								})
-							)}
-						>
-							Pricing
-						</Link>
-					</div>
-				</div>
-
-				<div className="flex justify-between space-x-3 items-center">
-					<Link
-						href="/auth"
-						className={cn(
-							buttonVariants({ variant: "secondary", size: "sm" })
-						)}
-					>
-						Login
-					</Link>
-					<Link
-						href="/auth "
-						className={cn(
-							buttonVariants({ variant: "default", size: "sm" })
-						)}
-					>
-						Get Started For Free
-					</Link>
-				</div>
-			</nav>
+				<section className="flex justify-between space-x-3 items-center">
+					{session ? (
+						<UserDropDown session={session} />
+					) : (
+						<Fragment>
+							<Link
+								href="/auth"
+								className={cn(
+									buttonVariants({
+										variant: "secondary",
+										size: "sm",
+									})
+								)}
+							>
+								Login
+							</Link>
+							<Link
+								href="/auth "
+								className={cn(
+									buttonVariants({
+										variant: "default",
+										size: "sm",
+									})
+								)}
+							>
+								Get Started For Free
+							</Link>
+						</Fragment>
+					)}
+				</section>
+			</div>
 		</header>
 	);
 };

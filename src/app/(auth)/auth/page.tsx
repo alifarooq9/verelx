@@ -16,7 +16,7 @@ const AuthPage = async () => {
 	return (
 		<div className="mx-auto w-full">
 			<main className="min-h-screen grid grid-cols-1 xl:grid-cols-2">
-				<div className="w-full p-6 sm:p-14">
+				<section className="w-full p-6 sm:p-14">
 					<Link
 						href="/"
 						className={cn(
@@ -35,8 +35,8 @@ const AuthPage = async () => {
 					</Link>
 
 					<UserAuthForm />
-				</div>
-				<div className="w-full bg-secondary opacity-50 sm:p-10 hidden xl:block"></div>
+				</section>
+				<aside className="w-full bg-secondary opacity-50 sm:p-10 hidden xl:block"></aside>
 			</main>
 		</div>
 	);
