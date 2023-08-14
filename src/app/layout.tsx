@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
+import { LogoutModel } from "@/components/auth/logout";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -59,7 +60,10 @@ export default async function RootLayout({
 	return (
 		<html className="dark " lang="en">
 			<body className={cn(font.variable, "tracking-normal")}>
-				<Providers>{children}</Providers>
+				<Providers>
+					<LogoutModel />
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);
