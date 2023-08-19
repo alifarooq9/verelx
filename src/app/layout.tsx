@@ -58,7 +58,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html className="dark " lang="en">
+		<html lang="en">
 			<body className={cn(font.variable, "tracking-normal")}>
 				<Providers>
 					<LogoutModel />

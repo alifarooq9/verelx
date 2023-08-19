@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	ArrowUpRightFromCircleIcon,
 	BarChart3Icon,
@@ -9,7 +11,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { cn, isActive } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const links = [
 	{
@@ -45,15 +48,17 @@ const links = [
 ];
 
 const UserSidebar = () => {
+	const pathname = usePathname();
+
 	return (
-		<aside className="w-96 sticky top-0 z-50 left-0 border-r p-6 h-full">
+		<aside className="w-80 sticky top-0 z-50 left-0 border-r p-6 h-full">
 			<Link
 				href="/"
 				className={cn(
 					buttonVariants({
 						size: "sm",
 						variant: "ghost",
-						className: "flex items-center w-fit",
+						className: cn("flex items-center w-fit"),
 					})
 				)}
 			>
@@ -71,8 +76,15 @@ const UserSidebar = () => {
 									buttonVariants({
 										size: "lg",
 										variant: "ghost",
-										className:
-											"flex items-center px-4 py-6 justify-start w-full",
+										className: cn(
+											"flex items-center py-6 justify-start w-full",
+											isActive({
+												pathname,
+												href: link.href,
+											})
+												? "bg-muted"
+												: ""
+										),
 									})
 								)}
 							>

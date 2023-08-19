@@ -4,7 +4,7 @@ const DashboardPage = async () => {
 	const session = await getServerSession();
 
 	return (
-		<main className="w-full rounded-lg">
+		<main className="flex-grow rounded-lg">
 			<h1>Dashboard</h1>
 			{session?.user.name}
 		</main>
