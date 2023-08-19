@@ -21,7 +21,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { Session } from "next-auth";
 import Link from "next/link";
-import { LogoutTrigger } from "../logout";
+import { LogoutTrigger } from "./logout";
 
 interface Props {
 	session: Session | null;

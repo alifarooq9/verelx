@@ -31,11 +31,16 @@ const UserAuthForm = () => {
 		},
 	});
 
-	const onSubmit = (values: UserAuthFormType) => {
-		console.log(values);
-	};
+	const { loading: googleLoading, mutate: handleGoogleLogin } =
+		useGoogleLogin();
 
-	const { loading: googleLoading, mutate } = useGoogleLogin();
+	const { loading: emailLoading, mutate: handleEmailLogin } = useEmailLogin();
+
+	const onSubmit = async (values: UserAuthFormType) => {
+		const result = await handleEmailLogin({
+			email: values.email,
+		});
+	};
 
 	return (
 		<Form {...form}>
@@ -62,11 +67,18 @@ const UserAuthForm = () => {
 							</FormControl>
 							<FormMessage className="text-destructive" />
 							<Button
-								disabled={googleLoading}
+								disabled={googleLoading || emailLoading}
 								type="submit"
 								className="w-full"
 							>
-								Continue with Email
+								{emailLoading ? (
+									<Loader2
+										className="w-4 h-4 mr-1.5 animate-spin"
+										strokeWidth={3}
+									/>
+								) : (
+									"Continue with Email"
+								)}
 							</Button>
 						</FormItem>
 					)}
@@ -87,9 +99,9 @@ const UserAuthForm = () => {
 					type="button"
 					size="icon"
 					variant="outline"
-					disabled={googleLoading}
+					disabled={googleLoading || emailLoading}
 					className="w-full"
-					onClick={async () => await mutate()}
+					onClick={async () => await handleGoogleLogin()}
 				>
 					{googleLoading ? (
 						<Loader2
@@ -145,6 +157,38 @@ const useGoogleLogin = () => {
 				signIn("google", {
 					callbackUrl: "/dashboard",
 				});
+				resolve(true);
+			} catch (error) {
+				reject(error);
+			}
+		});
+	};
+
+	return {
+		loading,
+		mutate,
+	};
+};
+
+const useEmailLogin = () => {
+	const [loading, setLoading] = useState<boolean>(false);
+
+	const mutate = ({ email }: { email: string }) => {
+		return new Promise((resolve, reject) => {
+			setLoading(true);
+			try {
+				signIn("email", {
+					email,
+					redirect: false,
+					callbackUrl: "/dashboard",
+				})
+					.then((res) => {
+						setLoading(false);
+						resolve(res);
+					})
+					.catch((err) => {
+						reject(err);
+					});
 				resolve(true);
 			} catch (error) {
 				reject(error);

@@ -43,6 +43,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "nodemailer": "^6.9.4",
     "prisma": "^5.1.1"
   }
 }
