@@ -37,7 +37,7 @@ const UserAuthForm = () => {
 	const { loading: emailLoading, mutate: handleEmailLogin } = useEmailLogin();
 
 	const onSubmit = async (values: UserAuthFormType) => {
-		const result = await handleEmailLogin({
+		await handleEmailLogin({
 			email: values.email,
 		});
 	};

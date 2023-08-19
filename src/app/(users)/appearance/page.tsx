@@ -5,7 +5,7 @@ const DashboardPage = async () => {
 
 	return (
 		<main className="w-full rounded-lg">
-			<h1>Dashboard</h1>
+			<h1>Appearance</h1>
 			{session?.user.name}
 		</main>
 	);

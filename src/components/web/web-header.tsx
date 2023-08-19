@@ -6,6 +6,21 @@ import { getServerSession } from "next-auth";
 import { Fragment } from "react";
 import UserDropDown from "../auth/user-dropdown";
 
+const links = [
+	{
+		name: "Features",
+		href: "/",
+	},
+	{
+		name: "Pricing",
+		href: "/",
+	},
+	{
+		name: "Testimonials",
+		href: "/",
+	},
+];
+
 const WebHeader = async () => {
 	const session = await getServerSession();
 
@@ -31,45 +46,21 @@ const WebHeader = async () => {
 					</Link>
 					<nav>
 						<ul className="flex items-center">
-							<li>
-								<Link
-									href="/"
-									className={cn(
-										buttonVariants({
-											size: "sm",
-											variant: "link2",
-										})
-									)}
-								>
-									Features
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/"
-									className={cn(
-										buttonVariants({
-											size: "sm",
-											variant: "link2",
-										})
-									)}
-								>
-									Pricing
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/"
-									className={cn(
-										buttonVariants({
-											size: "sm",
-											variant: "link2",
-										})
-									)}
-								>
-									Testimonials
-								</Link>
-							</li>
+							{links.map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className={cn(
+											buttonVariants({
+												size: "sm",
+												variant: "link2",
+											})
+										)}
+									>
+										{link.name}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</nav>
 				</section>
