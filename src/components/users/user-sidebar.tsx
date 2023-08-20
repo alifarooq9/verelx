@@ -13,6 +13,11 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { cn, isActive } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import type { Session } from "next-auth";
+
+type UserSidebarProps = {
+	session: Session | null;
+};
 
 const links = [
 	{
@@ -47,11 +52,11 @@ const links = [
 	},
 ];
 
-const UserSidebar = () => {
+const UserSidebar = ({ session }: UserSidebarProps) => {
 	const pathname = usePathname();
 
 	return (
-		<aside className="w-80 sticky top-0 z-50 left-0 border-r p-6 h-full">
+		<aside className="w-72 sticky top-0 z-50 left-0 border-r p-6 h-full">
 			<Link
 				href="/"
 				className={cn(

@@ -5,14 +5,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db";
 import { Adapter } from "node_modules/next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
+import type { User } from "@prisma/client";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
-    user: DefaultSession["user"] & {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    };
+    user: DefaultSession["user"] & User;
   }
 
   // interface User {
@@ -27,7 +24,6 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     secret: env.NEXTAUTH_SECRET,
-    
   },
   secret: env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma) as Adapter,

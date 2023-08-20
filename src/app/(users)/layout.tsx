@@ -12,8 +12,8 @@ const UsersLayout = async ({ children }: Props) => {
 	await redirectProtectedRoutes({ session, url: "/auth" });
 
 	return (
-		<div className="h-screen flex">
-			<UserSidebar />
+		<div className="h-screen flex container mx-auto">
+			<UserSidebar session={session}/>
 			{children}
 		</div>
 	);
