@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const Home = () => {
-	return (
-		<main>
-			<h1 className="">Hello World rights</h1>
-		</main>
-	);
+    return (
+        <main>
+            <h1 className="">Hello World rights</h1>
+        </main>
+    );
 };
 
 export default Home;
