@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -7,11 +6,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import PlansButton from "@/components/users/plansButton";
 import { PlanType, plans } from "@/configs/plans";
+import { getAuthSession } from "@/lib/auth-options";
+import { getUserSubscriptionPlan } from "@/lib/subscriptions";
 import { cn } from "@/lib/utils";
 import { CheckCircle2Icon } from "lucide-react";
+import { Session } from "next-auth";
 
-const PlansPage = () => {
+const PlansPage = async () => {
+    const session = await getAuthSession();
+
     return (
         <main className="flex-grow px-14 py-14">
             <h1 className="font-semibold text-2xl py-6 border-b">Plans</h1>
@@ -25,6 +30,8 @@ const PlansPage = () => {
                         price={plan.price}
                         variant={plan.variant}
                         key={plan.name}
+                        stripePriceId={plan.stripePriceId}
+                        session={session}
                     />
                 ))}
             </section>
@@ -32,16 +39,23 @@ const PlansPage = () => {
     );
 };
 
-const PricingCard = ({
+const PricingCard = async ({
     description,
     features,
     name,
     price,
     variant,
-}: PlanType) => {
+    session,
+    stripePriceId,
+}: PlanType & { session: Session | null }) => {
+    const subscriptionPlan = await getUserSubscriptionPlan({ session });
+
     return (
         <Card
-            className={cn("max-w-xs", variant === "highlighted" && "bg-muted")}
+            className={cn(
+                "max-w-xs flex flex-col",
+                variant === "highlighted" && "bg-muted",
+            )}
         >
             <CardHeader className="space-y-4">
                 <CardTitle className="font-semibold">{name}</CardTitle>
@@ -49,7 +63,7 @@ const PricingCard = ({
                     {description}
                 </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-full">
                 <div className="flex justify-start items-center">
                     <span className="text-4xl font-semibold">$</span>
                     <span className="text-6xl font-semibold">{price}</span>
@@ -74,15 +88,16 @@ const PricingCard = ({
                 </ul>
             </CardContent>
             <CardFooter>
-                <Button
-                    className="w-full"
-                    variant={
-                        variant === "highlighted" ? "default" : "secondary"
+                <PlansButton
+                    variant={variant}
+                    isCurrentPlan={
+                        subscriptionPlan.stripePriceId === stripePriceId
                     }
-                    size="lg"
-                >
-                    Get Started
-                </Button>
+                    session={session}
+                    stripePriceId={stripePriceId}
+                    isSubscribed={!!subscriptionPlan.isSubscribed}
+                    stripeCustomerId={subscriptionPlan.stripeCustomerId}
+                />
             </CardFooter>
         </Card>
     );

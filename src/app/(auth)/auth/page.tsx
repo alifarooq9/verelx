@@ -1,13 +1,13 @@
 import UserAuthForm from "@/components/auth/user-auth-form";
 import { buttonVariants } from "@/components/ui/button";
+import { getAuthSession } from "@/lib/auth-options";
 import { cn } from "@/lib/utils";
 import { MaximizeIcon } from "lucide-react";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const AuthPage = async () => {
-    const session = await getServerSession();
+    const session = await getAuthSession();
 
     if (session) {
         redirect("/dashboard");

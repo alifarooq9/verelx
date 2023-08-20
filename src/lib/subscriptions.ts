@@ -1,11 +1,13 @@
 import { plans } from "@/configs/plans";
-import { getAuthSession } from "./auth-options";
 import { prisma } from "./db";
 import { stripe } from "./stripe";
+import type { Session } from "next-auth";
 
-const getUserSubscriptionPlan = async () => {
-    const session = await getAuthSession();
+type Props = {
+    session: Session | null;
+};
 
+export const getUserSubscriptionPlan = async ({ session }: Props) => {
     if (!session || !session.user) throw new Error("User not found.");
 
     const user = await prisma.user.findFirst({

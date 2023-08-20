@@ -9,11 +9,13 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db";
 import { Adapter } from "node_modules/next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
-import type { User } from "@prisma/client";
+import { User } from "@prisma/client";
 
 declare module "next-auth" {
     interface Session extends DefaultSession {
-        user: DefaultSession["user"] & User;
+        user: DefaultSession["user"] & {
+            id: string;
+        };
     }
 
     // interface User {
@@ -23,13 +25,16 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
-    session: {
-        strategy: "jwt",
-    },
-    jwt: {
-        secret: env.NEXTAUTH_SECRET,
-    },
     secret: env.NEXTAUTH_SECRET,
+    callbacks: {
+        session: ({ session, user }) => ({
+            ...session,
+            user: {
+                ...session.user,
+                id: user.id,
+            },
+        }),
+    },
     adapter: PrismaAdapter(prisma) as Adapter,
     providers: [
         GoogleProvider({

@@ -2,9 +2,9 @@ import Link from "next/link";
 import { MaximizeIcon, LogInIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
-import { getServerSession } from "next-auth";
 import { Fragment } from "react";
 import UserDropDown from "../auth/user-dropdown";
+import { getAuthSession } from "@/lib/auth-options";
 
 const links = [
     {
@@ -22,7 +22,7 @@ const links = [
 ];
 
 const WebHeader = async () => {
-    const session = await getServerSession();
+    const session = await getAuthSession();
 
     return (
         <header className="w-full sticky top-0 h-16 border-b flex items-center">

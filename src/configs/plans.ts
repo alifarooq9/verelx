@@ -1,11 +1,11 @@
-import { env } from "@/env/client";
+export type Variant = "default" | "highlighted";
 
 export type PlanType = {
     name: string;
     description: string;
     price: number;
     features: string[];
-    variant: "default" | "highlighted";
+    variant: Variant;
     stripePriceId: string;
 };
 
@@ -22,7 +22,7 @@ export const plans: PlanType[] = [
             "Locker room and shower facilities",
         ],
         variant: "default",
-        stripePriceId: env.PUBLIC_STRIPE_BASIC_PRICE_ID,
+        stripePriceId: process.env.STRIPE_BASIC_PRICE_ID as string,
     },
     {
         name: "Premium",
@@ -36,7 +36,7 @@ export const plans: PlanType[] = [
             "Nutritional guidance from our experts",
         ],
         variant: "highlighted",
-        stripePriceId: env.PUBLIC_STRIPE_PREMIUM_PRICE_ID,
+        stripePriceId: process.env.STRIPE_PREMIUM_PRICE_ID as string,
     },
     {
         name: "Elite",
@@ -50,6 +50,6 @@ export const plans: PlanType[] = [
             "Access to exclusive training workshops",
         ],
         variant: "default",
-        stripePriceId: env.PUBLIC_STRIPE_ELITE_PRICE_ID,
+        stripePriceId: process.env.STRIPE_ELITE_PRICE_ID as string,
     },
 ];

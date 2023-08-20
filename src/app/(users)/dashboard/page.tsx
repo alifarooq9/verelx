@@ -1,11 +1,12 @@
 import { buttonVariants } from "@/components/ui/button";
+import { getAuthSession } from "@/lib/auth-options";
 import { cn } from "@/lib/utils";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { Fragment } from "react";
 
 const DashboardPage = async () => {
-    const session = await getServerSession();
+    const session = await getAuthSession();
+    
 
     return (
         <main className="flex-grow px-14 py-14">

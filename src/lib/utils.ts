@@ -1,5 +1,4 @@
 import { type ClassValue, clsx } from "clsx";
-import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -17,4 +16,8 @@ export const isActive = ({ pathname, href }: ActiveLinkProps) => {
     } else {
         return false;
     }
+};
+
+export const absoluteURL = (path: string) => {
+    return `${process.env.NEXTAUTH_URL || "http://localhost:3000"}${path}`;
 };

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { LogoutModel } from "@/components/auth/logout";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
     title: "Verelx",
@@ -63,6 +64,7 @@ export default async function RootLayout({
                 <Providers>
                     <LogoutModel />
                     {children}
+                    <Toaster />
                 </Providers>
             </body>
         </html>
