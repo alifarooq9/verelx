@@ -38,7 +38,7 @@ const DontHaveMembership = () => {
 		<Fragment>
 			<h3 className="text-lg mb-3">You don not have any membership</h3>
 			<Link href="/plans" className={cn(buttonVariants({ size: "lg" }))}>
-				<span>Buy a membership</span>
+				<span>Buy a Membership</span>
 			</Link>
 		</Fragment>
 	);
