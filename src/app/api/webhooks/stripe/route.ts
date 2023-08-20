@@ -1,3 +1,4 @@
+import { env } from "@/env/server";
 import { prisma } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
         event = stripe.webhooks.constructEvent(
             body,
             signature,
-            "whsec_3be25ea93c2691f2e243c0b69047e03d28e4237bdfccde8b82a2e833ddf57b99",
+            env.STRIPE_WEBHOOK_SECRET,
         );
     } catch (error) {
         return new Response(
@@ -48,7 +49,6 @@ export async function POST(request: Request) {
                 stripeCustomerId: subscription.customer as string,
             },
         });
-
     }
 
     if (event.type === "invoice.payment_succeeded") {
