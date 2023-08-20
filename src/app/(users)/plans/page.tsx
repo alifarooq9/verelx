@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { CheckCircle2Icon } from "lucide-react";
 
 type PlanType = {
@@ -14,7 +15,7 @@ type PlanType = {
 	description: string;
 	price: number;
 	features: string[];
-	buttonVariant: "default" | "secondary";
+	variant: "default" | "highlighted";
 };
 
 const plans: PlanType[] = [
@@ -29,7 +30,7 @@ const plans: PlanType[] = [
 			"Unlimited access during regular hours",
 			"Locker room and shower facilities",
 		],
-		buttonVariant: "secondary",
+		variant: "default",
 	},
 	{
 		name: "Premium",
@@ -42,7 +43,7 @@ const plans: PlanType[] = [
 			"Personalized workout plans",
 			"Nutritional guidance from our experts",
 		],
-		buttonVariant: "default",
+		variant: "highlighted",
 	},
 	{
 		name: "Elite",
@@ -55,7 +56,7 @@ const plans: PlanType[] = [
 			"Priority booking for group classes",
 			"Access to exclusive training workshops",
 		],
-		buttonVariant: "secondary",
+		variant: "default",
 	},
 ];
 
@@ -71,7 +72,7 @@ const PlansPage = () => {
 						features={plan.features}
 						name={plan.name}
 						price={plan.price}
-						buttonVariant={plan.buttonVariant}
+						variant={plan.variant}
 						key={plan.name}
 					/>
 				))}
@@ -85,10 +86,12 @@ const PricingCard = ({
 	features,
 	name,
 	price,
-	buttonVariant,
+	variant,
 }: PlanType) => {
 	return (
-		<Card className="max-w-xs">
+		<Card
+			className={cn("max-w-xs", variant === "highlighted" && "bg-muted")}
+		>
 			<CardHeader className="space-y-4">
 				<CardTitle className="font-semibold">{name}</CardTitle>
 				<CardDescription className="font-light">
@@ -113,7 +116,13 @@ const PricingCard = ({
 				</ul>
 			</CardContent>
 			<CardFooter>
-				<Button className="w-full" variant={buttonVariant} size="lg">
+				<Button
+					className="w-full"
+					variant={
+						variant === "highlighted" ? "default" : "secondary"
+					}
+					size="lg"
+				>
 					Get Started
 				</Button>
 			</CardFooter>

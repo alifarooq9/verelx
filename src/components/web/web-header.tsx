@@ -25,7 +25,7 @@ const WebHeader = async () => {
 	const session = await getServerSession();
 
 	return (
-		<header className="w-full sticky top-0 h-14 border-b flex items-center">
+		<header className="w-full sticky top-0 h-16 border-b flex items-center">
 			<div className="mx-auto container  flex justify-between items-center">
 				<section className="flex items-center space-x-4">
 					<Link
