@@ -36,11 +36,6 @@ const links = [
         icon: CreditCardIcon,
     },
     {
-        name: "Plans",
-        href: "/plans",
-        icon: ArrowUpRightFromCircleIcon,
-    },
-    {
         name: "Settings",
         href: "/settings",
         icon: SettingsIcon,
@@ -56,7 +51,7 @@ const UserSidebar = ({ session }: UserSidebarProps) => {
     const pathname = usePathname();
 
     return (
-        <aside className="w-72 sticky top-0 z-50 left-0 border-r p-6 h-full">
+        <aside className="w-72 sticky hidden md:block top-0 z-50 left-0 border-r p-6 h-full">
             <Link
                 href="/"
                 className={cn(

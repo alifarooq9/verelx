@@ -1,3 +1,6 @@
+import { PlanType } from "@/configs/plans";
+import { getUserSubscriptionPlan } from "@/lib/subscriptions";
+import { Session } from "next-auth";
 import {
     Card,
     CardContent,
@@ -6,38 +9,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import PlansButton from "@/components/users/plansButton";
-import { PlanType, plans } from "@/configs/plans";
-import { getAuthSession } from "@/lib/auth-options";
-import { getUserSubscriptionPlan } from "@/lib/subscriptions";
 import { cn } from "@/lib/utils";
 import { CheckCircle2Icon } from "lucide-react";
-import { Session } from "next-auth";
-
-const PlansPage = async () => {
-    const session = await getAuthSession();
-
-    return (
-        <main className="flex-grow px-14 py-14">
-            <h1 className="font-semibold text-2xl py-6 border-b">Plans</h1>
-
-            <section className="py-8 grid grid-cols-3 gap-5">
-                {plans.map((plan) => (
-                    <PricingCard
-                        description={plan.description}
-                        features={plan.features}
-                        name={plan.name}
-                        price={plan.price}
-                        variant={plan.variant}
-                        key={plan.name}
-                        stripePriceId={plan.stripePriceId}
-                        session={session}
-                    />
-                ))}
-            </section>
-        </main>
-    );
-};
+import SubscribeBtn from "./users/subscribeBtn";
 
 const PricingCard = async ({
     description,
@@ -48,7 +22,7 @@ const PricingCard = async ({
     session,
     stripePriceId,
 }: PlanType & { session: Session | null }) => {
-    const subscriptionPlan = await getUserSubscriptionPlan({ session });
+    const subscriptionPlan = await getUserSubscriptionPlan();
 
     return (
         <Card
@@ -88,7 +62,7 @@ const PricingCard = async ({
                 </ul>
             </CardContent>
             <CardFooter>
-                <PlansButton
+                <SubscribeBtn
                     variant={variant}
                     isCurrentPlan={
                         subscriptionPlan.stripePriceId === stripePriceId
@@ -103,4 +77,4 @@ const PricingCard = async ({
     );
 };
 
-export default PlansPage;
+export default PricingCard;

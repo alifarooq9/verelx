@@ -18,7 +18,7 @@ type PlansButtonProps = {
     session: Session | null;
 };
 
-const PlansButton = ({
+const SubscribeBtn = ({
     variant,
     stripePriceId,
     isCurrentPlan,
@@ -29,7 +29,6 @@ const PlansButton = ({
     const router = useRouter();
 
     const [loading, setLoading] = useState<boolean>(false);
-
 
     const plansButtonFetchBodyType: StripeSubscriptionBodyType = {
         isSubscribed,
@@ -43,6 +42,11 @@ const PlansButton = ({
     const handleOnClick = async () => {
         setLoading(true);
 
+        if (isSubscribed) {
+            router.push("/billing");
+            return;
+        }
+
         try {
             const handleFetch = await fetch("/api/stripe/manage-subscription", {
                 method: "POST",
@@ -54,8 +58,6 @@ const PlansButton = ({
 
             if (handleFetch.ok) {
                 const response = await handleFetch.json();
-
-                console.log(response, "Response");
 
                 if (session) {
                     router.push(response.stripeUrl);
@@ -97,4 +99,4 @@ const PlansButton = ({
     );
 };
 
-export default PlansButton;
+export default SubscribeBtn;

@@ -70,12 +70,6 @@ const UserDropDown = ({ session }: Props) => {
                             <span>Billing</span>
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                        <Link href="/plans" className="cursor-pointer">
-                            <ArrowUpRightFromCircle className="mr-2 h-4 w-4" />
-                            <span>Plans</span>
-                        </Link>
-                    </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>

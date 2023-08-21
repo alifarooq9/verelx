@@ -1,0 +1,116 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { plans } from "@/configs/plans";
+import { getUserSubscriptionPlan } from "@/lib/subscriptions";
+import { TerminalIcon } from "lucide-react";
+import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
+import {
+    DrawerContent,
+    DrawerIcon,
+    DrawerRoot,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer";
+
+const Billing = async () => {
+    const {
+        isCanceled,
+        isSubscribed,
+        stripeCustomerId,
+        stripeCurrentPeriodEnd,
+        stripeSubscriptionId,
+        stripePriceId,
+    } = await getUserSubscriptionPlan();
+
+    const currentPlan = plans.find(
+        (plan) => plan.stripePriceId === stripePriceId,
+    );
+
+    return (
+        <main className="flex-grow sm:px-14 sm:py-14">
+            <h1 className="font-semibold text-2xl py-6 border-b">Billing</h1>
+
+            <section className="py-8 space-y-8">
+                <Alert>
+                    <TerminalIcon className="h-4 w-4" />
+                    <AlertTitle>Heads up! Demo App Alert</AlertTitle>
+                    <AlertDescription className="font-light text-muted-foreground">
+                        Verelx is a demo app. to get successfull payments, use
+                        4242 4242 4242 4242 as card number, any future date as
+                        expiration date, and any 3 digits as CVC.
+                    </AlertDescription>
+                </Alert>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Subscription Plan</CardTitle>
+                        <CardDescription>
+                            You&apos;re currently on{" "}
+                            <span className="font-extrabold">
+                                {currentPlan?.name}
+                            </span>{" "}
+                            plan
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="font-medium">
+                            {isCanceled ? (
+                                <span>
+                                    Your subscription is canceled. You can renew
+                                    it anytime.
+                                </span>
+                            ) : isSubscribed ? (
+                                <span>
+                                    Your subscription is active. You can cancel
+                                    it anytime.
+                                </span>
+                            ) : (
+                                <span>
+                                    You don&apos;t have any subscription. You
+                                    can subscribe to a plan anytime.
+                                </span>
+                            )}
+                        </p>
+                        <p className="font-light text-muted-foreground">
+                            {isCanceled ? (
+                                <span>Your subscription will end on </span>
+                            ) : (
+                                <span>
+                                    Your subscription will be renewed on{" "}
+                                </span>
+                            )}
+                            {format(stripeCurrentPeriodEnd as Date, "PPP")}
+                        </p>
+                    </CardContent>
+                    <CardFooter className="space-x-2">
+                        {isSubscribed && <Button>Manage Subscription</Button>}
+
+                        <DrawerRoot>
+                            <DrawerTrigger asChild>
+                                <Button>
+                                    {isSubscribed ? "Change Plan" : "Subscribe"}
+                                </Button>
+                            </DrawerTrigger>
+
+                            <DrawerContent>
+                                <DrawerIcon />
+
+                                <DrawerTitle>This is heading</DrawerTitle>
+                            </DrawerContent>
+                        </DrawerRoot>
+                    </CardFooter>
+                </Card>
+            </section>
+        </main>
+    );
+};
+
+export default Billing;

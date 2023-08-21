@@ -60,7 +60,12 @@ export default async function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={cn(font.variable, "tracking-normal")}>
+            <body
+                className={cn(
+                    font.variable,
+                    "tracking-normal overflow-x-hidden w-screen",
+                )}
+            >
                 <Providers>
                     <LogoutModel />
                     {children}
