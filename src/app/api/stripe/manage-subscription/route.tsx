@@ -23,8 +23,6 @@ export async function POST(request: Request) {
     const billingUrl = absoluteURL("/billing");
 
     if (isSubscribed && stripeCustomerId && isCurrentPlan) {
-        console.log(isSubscribed, stripeCustomerId, isCurrentPlan);
-
         const stripeSession = await stripe.billingPortal.sessions.create({
             customer: stripeCustomerId,
             return_url: billingUrl,

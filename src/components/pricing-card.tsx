@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { CheckCircle2Icon } from "lucide-react";
-import SubscribeBtn from "./users/subscribeBtn";
+import SubscribeBtn from "./users/subscribePlanBtn";
 
 const PricingCard = async ({
     description,
@@ -67,7 +67,6 @@ const PricingCard = async ({
                     isCurrentPlan={
                         subscriptionPlan.stripePriceId === stripePriceId
                     }
-                    session={session}
                     stripePriceId={stripePriceId}
                     isSubscribed={!!subscriptionPlan.isSubscribed}
                     stripeCustomerId={subscriptionPlan.stripeCustomerId}

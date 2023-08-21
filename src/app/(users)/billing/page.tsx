@@ -21,12 +21,18 @@ import {
 } from "@/components/ui/drawer";
 import PricingCard from "@/components/pricing-card";
 import { getAuthSession } from "@/lib/auth-options";
+import ManageSubscriptionBtn from "@/components/users/manageSubscriptionBtn";
 
 const Billing = async () => {
     const session = await getAuthSession();
 
-    const { isCanceled, isSubscribed, stripeCurrentPeriodEnd, stripePriceId } =
-        await getUserSubscriptionPlan();
+    const {
+        isCanceled,
+        isSubscribed,
+        stripeCurrentPeriodEnd,
+        stripePriceId,
+        stripeCustomerId,
+    } = await getUserSubscriptionPlan();
 
     const currentPlan = plans.find(
         (plan) => plan.stripePriceId === stripePriceId,
@@ -91,7 +97,16 @@ const Billing = async () => {
                         )}
                     </CardContent>
                     <CardFooter className="space-x-2">
-                        {isSubscribed && <Button>Manage Subscription</Button>}
+                        {isSubscribed && (
+                            <ManageSubscriptionBtn
+                                isCurrentPlan={
+                                    currentPlan?.stripePriceId === stripePriceId
+                                }
+                                isSubscribed={isSubscribed}
+                                stripePriceId={stripePriceId as string}
+                                stripeCustomerId={stripeCustomerId}
+                            />
+                        )}
 
                         <DrawerRoot>
                             <DrawerTrigger asChild>

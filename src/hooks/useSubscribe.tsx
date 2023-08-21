@@ -1,45 +1,41 @@
 "use client";
 
-import { Variant } from "@/configs/plans";
-import { Button } from "../ui/button";
 import { useState } from "react";
 import { StripeSubscriptionBodyType } from "@/app/api/stripe/manage-subscription/route";
-import { Session } from "next-auth";
+import { toast } from "@/components/ui/use-toast";
+import type { Variant } from "@/configs/plans";
 import { useRouter } from "next/navigation";
-import { toast } from "../ui/use-toast";
-import { Loader2Icon } from "lucide-react";
+import { useSession } from "next-auth/react";
 
-type PlansButtonProps = {
-    variant: Variant;
+type UseSubscribeProps = {
     stripePriceId: string;
     isCurrentPlan: boolean;
     isSubscribed: boolean;
     stripeCustomerId?: string | null;
-    session: Session | null;
 };
 
-const SubscribeBtn = ({
-    variant,
-    stripePriceId,
-    isCurrentPlan,
-    isSubscribed,
-    stripeCustomerId,
-    session,
-}: PlansButtonProps) => {
+const useSubscribe = () => {
     const router = useRouter();
+
+    const { data: session } = useSession();
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    const plansButtonFetchBodyType: StripeSubscriptionBodyType = {
-        isSubscribed,
-        stripeCustomerId,
+    const mutate = async ({
         isCurrentPlan,
-        email: session?.user?.email as string,
-        userId: session?.user?.id as string,
+        isSubscribed,
         stripePriceId,
-    };
+        stripeCustomerId,
+    }: UseSubscribeProps) => {
+        const plansButtonFetchBodyType: StripeSubscriptionBodyType = {
+            isSubscribed,
+            stripeCustomerId,
+            isCurrentPlan,
+            email: session?.user?.email as string,
+            userId: session?.user?.id as string,
+            stripePriceId,
+        };
 
-    const handleOnClick = async () => {
         setLoading(true);
 
         try {
@@ -79,19 +75,10 @@ const SubscribeBtn = ({
         }
     };
 
-    return (
-        <Button
-            disabled={loading}
-            onClick={handleOnClick}
-            className="w-full flex items-center"
-            variant={variant === "highlighted" ? "default" : "secondary"}
-            size="lg"
-        >
-            {loading && <Loader2Icon className="animate-spin mr-2 w-4 h-4" />}
-            {isSubscribed && isCurrentPlan && "Manage"}
-            {!isCurrentPlan && "Subscribe"}
-        </Button>
-    );
+    return {
+        mutate,
+        loading,
+    };
 };
 
-export default SubscribeBtn;
+export default useSubscribe;
