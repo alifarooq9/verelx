@@ -1,13 +1,10 @@
 "use client";
 
 import {
-    ArrowUpRightFromCircleIcon,
     BarChart3Icon,
     CreditCardIcon,
-    MaximizeIcon,
     MoonIcon,
     SettingsIcon,
-    UserIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
@@ -20,11 +17,6 @@ type UserSidebarProps = {
 };
 
 export const links = [
-    {
-        name: "Profile",
-        href: "/profile",
-        icon: UserIcon,
-    },
     {
         name: "Dashboard",
         href: "/dashboard",

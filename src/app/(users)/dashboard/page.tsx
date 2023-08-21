@@ -10,7 +10,6 @@ const DashboardPage = async () => {
     return (
         <main className="flex-1 sm:px-14 sm:py-14">
             <h1 className="font-semibold text-2xl py-6 border-b">Dashboard</h1>
-            {session?.user.role}
             <section className="py-8">
                 {session?.user.role === "MEMBER" ? (
                     <HaveMembership />

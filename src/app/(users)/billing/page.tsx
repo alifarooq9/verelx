@@ -96,7 +96,7 @@ const Billing = async () => {
                             </p>
                         )}
                     </CardContent>
-                    <CardFooter className="space-x-2">
+                    <CardFooter className="sm:space-x-2 space-y-4 sm:space-y-0 space-x-0 flex flex-col sm:flex-row s">
                         {isSubscribed && (
                             <ManageSubscriptionBtn
                                 isCurrentPlan={
@@ -110,7 +110,11 @@ const Billing = async () => {
 
                         <DrawerRoot>
                             <DrawerTrigger asChild>
-                                <Button variant="secondary">
+                                <Button
+                                    variant="secondary"
+                                    size="lg"
+                                    className="w-full sm:w-auto"
+                                >
                                     {isSubscribed ? "Change Plan" : "Subscribe"}
                                 </Button>
                             </DrawerTrigger>

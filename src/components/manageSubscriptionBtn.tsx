@@ -32,7 +32,7 @@ const ManageSubscriptionBtn = ({
         <Button
             disabled={loading}
             onClick={handleOnClick}
-            className="flex items-center"
+            className="flex items-center w-full sm:w-auto"
             size="lg"
         >
             {loading && <Loader2Icon className="animate-spin mr-2 w-4 h-4" />}
