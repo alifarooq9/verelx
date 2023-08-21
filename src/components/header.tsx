@@ -1,43 +1,28 @@
 import Link from "next/link";
 import { MaximizeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Fragment } from "react";
-import UserDropDown from "../auth/user-dropdown";
+import UserDropDown from "@/components/user-dropdown";
 import { getAuthSession } from "@/lib/auth-options";
 
-const links = [
-    {
-        name: "Features",
-        href: "/",
-    },
-    {
-        name: "Pricing",
-        href: "/",
-    },
-    {
-        name: "Testimonials",
-        href: "/",
-    },
-];
+type LinkType = {
+    name: string;
+    href: string;
+};
 
-const WebHeader = async () => {
+type HeaderProps = {
+    links: LinkType[];
+};
+
+const Header = async ({ links }: HeaderProps) => {
     const session = await getAuthSession();
 
     return (
         <header className="w-full sticky top-0 h-16 border-b flex items-center">
-            <div className="mx-auto container  flex justify-between items-center">
+            <div className="mx-auto w-full px-4 flex justify-between items-center">
                 <section className="flex items-center space-x-4">
-                    <Link
-                        href="/"
-                        className={cn(
-                            buttonVariants({
-                                size: "sm",
-                                variant: "ghost",
-                                className: "flex items-center",
-                            }),
-                        )}
-                    >
+                    <Link href="/" className="flex items-center">
                         <MaximizeIcon
                             className="w-5 h-5 mr-2"
                             strokeWidth={2}
@@ -100,4 +85,4 @@ const WebHeader = async () => {
     );
 };
 
-export default WebHeader;
+export default Header;

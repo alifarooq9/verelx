@@ -1,8 +1,8 @@
-import AppearanceModesLoading from "@/components/users/appearance-modes-loading";
+import AppearanceModesLoading from "@/components/appearance-modes-loading";
 import dynamic from "next/dynamic";
 
 const AppearanceModes = dynamic(
-    () => import("@/components/users/appearance-modes"),
+    () => import("@/components/appearance-modes"),
     { ssr: false, loading: () => <AppearanceModesLoading /> },
 );
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Variant } from "@/configs/plans";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 import { Loader2Icon } from "lucide-react";
 import useSubscribe from "@/hooks/useSubscribe";
 

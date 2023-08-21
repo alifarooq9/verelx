@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { CheckCircle2Icon } from "lucide-react";
-import SubscribeBtn from "./users/subscribePlanBtn";
+import SubscribeBtn from "./subscribePlanBtn";
 
 const PricingCard = async ({
     description,

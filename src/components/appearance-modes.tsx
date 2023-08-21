@@ -2,9 +2,9 @@
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import darkModeImage from "../../../public/darkMode.png";
-import lightModeImage from "../../../public/lightMode.png";
-import systemModeImage from "../../../public/systemMode.png";
+import darkModeImage from "../../public/darkMode.png";
+import lightModeImage from "../../public/lightMode.png";
+import systemModeImage from "../../public/systemMode.png";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
 

@@ -1,5 +1,5 @@
-import UserHeader from "@/components/users/user-header";
-import UserSidebar from "@/components/users/user-sidebar";
+import Header from "@/components/header";
+import UserSidebar from "@/components/user-sidebar";
 import { getAuthSession } from "@/lib/auth-options";
 import { redirectProtectedRoutes } from "@/lib/redirect-routes";
 import { Fragment } from "react";
@@ -8,6 +8,13 @@ interface Props {
     children: React.ReactNode;
 }
 
+const headerLinks = [
+    {
+        name: "Features",
+        href: "/",
+    },
+];
+
 const UsersLayout = async ({ children }: Props) => {
     const session = await getAuthSession();
 
@@ -15,7 +22,7 @@ const UsersLayout = async ({ children }: Props) => {
 
     return (
         <Fragment>
-            <UserHeader />
+            <Header links={headerLinks} />
             <div className="h-screen flex container mx-auto w-screen overflow-x-hidden">
                 <UserSidebar session={session} />
                 {children}

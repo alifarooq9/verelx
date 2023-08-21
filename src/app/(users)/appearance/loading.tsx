@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import AppearanceModesLoading from "@/components/users/appearance-modes-loading";
+import AppearanceModesLoading from "@/components/appearance-modes-loading";
 
 const AppearanceLoading = () => {
     return (

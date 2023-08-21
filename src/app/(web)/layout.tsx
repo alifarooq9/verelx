@@ -1,13 +1,28 @@
-import WebHeader from "@/components/web/web-header";
+import Header from "@/components/header";
 
 interface Props {
     children: React.ReactNode;
 }
 
+const headerLinks = [
+    {
+        name: "Features",
+        href: "/",
+    },
+    {
+        name: "Pricing",
+        href: "/",
+    },
+    {
+        name: "Testimonials",
+        href: "/",
+    },
+];
+
 const WebLayout = ({ children }: Props) => {
     return (
         <div>
-            <WebHeader />
+            <Header links={headerLinks} />
             {children}
         </div>
     );

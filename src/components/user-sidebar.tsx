@@ -10,7 +10,7 @@ import {
     UserIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "./ui/button";
 import { cn, isActive } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";

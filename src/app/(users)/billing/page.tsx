@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/drawer";
 import PricingCard from "@/components/pricing-card";
 import { getAuthSession } from "@/lib/auth-options";
-import ManageSubscriptionBtn from "@/components/users/manageSubscriptionBtn";
+import ManageSubscriptionBtn from "@/components/manageSubscriptionBtn";
 
 const Billing = async () => {
     const session = await getAuthSession();
