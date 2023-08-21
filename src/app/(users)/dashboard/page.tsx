@@ -8,8 +8,13 @@ const DashboardPage = async () => {
     const session = await getAuthSession();
 
     return (
-        <main className="flex-1 sm:px-14 sm:py-14">
-            <h1 className="font-semibold text-2xl py-6 border-b">Dashboard</h1>
+        <main className="flex-1 sm:px-10 py-6 sm:py-10">
+            <div className="border-b pb-6">
+                <h1 className="font-semibold text-2xl">Dashboard</h1>
+                <p className="font-light text-muted-foreground">
+                    This is your subscription dashboard
+                </p>
+            </div>
             <section className="py-8">
                 {session?.user.role === "MEMBER" ? (
                     <HaveMembership />

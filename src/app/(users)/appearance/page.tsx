@@ -8,8 +8,13 @@ const AppearanceModes = dynamic(() => import("@/components/appearance-modes"), {
 
 const DashboardPage = async () => {
     return (
-        <main className="flex-1 md:px-14 md:py-14">
-            <h1 className="font-semibold text-2xl py-6 border-b">Appearance</h1>
+        <main className="flex-1 sm:px-10 py-6 sm:py-10">
+            <div className="border-b pb-6">
+                <h1 className="font-semibold text-2xl">Appearance</h1>
+                <p className="font-light text-muted-foreground">
+                    Change your UI theme here
+                </p>
+            </div>
 
             <section className="py-8 w-fit">
                 <h2 className="font-medium">Theme</h2>

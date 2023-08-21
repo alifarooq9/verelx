@@ -3,9 +3,10 @@ import AppearanceModesLoading from "@/components/appearance-modes-loading";
 
 const AppearanceLoading = () => {
     return (
-        <div className="flex-1 md:px-14 md:py-14">
-            <div className="py-6 border-b">
-                <Skeleton className="w-48 h-8" />
+        <div className="flex-1 sm:px-10 py-6 sm:py-10">
+            <div className="border-b pb-6 space-y-2">
+                <Skeleton className="w-48 h-9" />
+                <Skeleton className="w-full max-w-2xl h-5" />
             </div>
 
             <div className="py-8">

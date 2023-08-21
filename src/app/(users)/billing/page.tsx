@@ -39,8 +39,13 @@ const Billing = async () => {
     );
 
     return (
-        <main className="flex-1 sm:px-14 sm:py-14">
-            <h1 className="font-semibold text-2xl py-6 border-b">Billing</h1>
+        <main className="flex-1 sm:px-10 py-6 sm:py-10">
+            <div className="border-b pb-6">
+                <h1 className="font-semibold text-2xl">Billing</h1>
+                <p className="font-light text-muted-foreground">
+                    Manage your subscription here
+                </p>
+            </div>
 
             <section className="py-8 space-y-8">
                 <Alert>
