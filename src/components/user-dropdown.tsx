@@ -1,5 +1,4 @@
 import {
-    ArrowUpRightFromCircle,
     BarChart3,
     CreditCard,
     LogOutIcon,

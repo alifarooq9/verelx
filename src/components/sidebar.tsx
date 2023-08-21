@@ -52,21 +52,7 @@ const UserSidebar = ({ session }: UserSidebarProps) => {
 
     return (
         <aside className="w-72 sticky hidden md:block top-0 z-50 left-0 border-r p-6 h-full">
-            <Link
-                href="/"
-                className={cn(
-                    buttonVariants({
-                        size: "sm",
-                        variant: "ghost",
-                        className: cn("flex items-center w-fit"),
-                    }),
-                )}
-            >
-                <MaximizeIcon className="w-5 h-5 mr-2" strokeWidth={2} />
-                <span className="font-bold text-xl">Verelx</span>
-            </Link>
-
-            <nav className="mt-8">
+            <nav>
                 <ul className="space-y-1">
                     {links.map((link) => (
                         <li key={link.href}>

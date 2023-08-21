@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import UserSidebar from "@/components/user-sidebar";
+import UserSidebar from "@/components/sidebar";
 import { getAuthSession } from "@/lib/auth-options";
 import { redirectProtectedRoutes } from "@/lib/redirect-routes";
 import { Fragment } from "react";
