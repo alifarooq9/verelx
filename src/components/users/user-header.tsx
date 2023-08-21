@@ -11,22 +11,14 @@ const links = [
         name: "Features",
         href: "/",
     },
-    {
-        name: "Pricing",
-        href: "/",
-    },
-    {
-        name: "Testimonials",
-        href: "/",
-    },
 ];
 
-const WebHeader = async () => {
+const UserHeader = async () => {
     const session = await getAuthSession();
 
     return (
-        <header className="w-full sticky top-0 h-16 border-b flex items-center">
-            <div className="mx-auto container  flex justify-between items-center">
+        <header className="w-full md:hidden sticky top-0 h-16 border-b z-50 bg-background flex items-center">
+            <div className="mx-auto w-full px-4 container flex justify-between items-center">
                 <section className="flex items-center space-x-4">
                     <Link
                         href="/"
@@ -100,4 +92,4 @@ const WebHeader = async () => {
     );
 };
 
-export default WebHeader;
+export default UserHeader;

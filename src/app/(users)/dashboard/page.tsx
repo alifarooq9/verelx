@@ -6,12 +6,11 @@ import { Fragment } from "react";
 
 const DashboardPage = async () => {
     const session = await getAuthSession();
-    
 
     return (
-        <main className="flex-grow px-14 py-14">
+        <main className="flex-grow sm:px-14 sm:py-14">
             <h1 className="font-semibold text-2xl py-6 border-b">Dashboard</h1>
-
+            {session?.user.role}
             <section className="py-8">
                 {session?.user.role === "MEMBER" ? (
                     <HaveMembership />
@@ -38,7 +37,10 @@ const DontHaveMembership = () => {
     return (
         <Fragment>
             <h3 className="text-lg mb-3">You don not have any membership</h3>
-            <Link href="/plans" className={cn(buttonVariants({ size: "lg" }))}>
+            <Link
+                href="/billing"
+                className={cn(buttonVariants({ size: "lg" }))}
+            >
                 <span>Buy a Membership</span>
             </Link>
         </Fragment>

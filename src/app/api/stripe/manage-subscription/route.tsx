@@ -21,7 +21,6 @@ export async function POST(request: Request) {
     }: StripeSubscriptionBodyType = await request.json();
 
     const billingUrl = absoluteURL("/billing");
-    const plansUrl = absoluteURL("/plans");
 
     if (isSubscribed && stripeCustomerId && isCurrentPlan) {
         console.log(isSubscribed, stripeCustomerId, isCurrentPlan);
@@ -41,7 +40,7 @@ export async function POST(request: Request) {
     const stripeSession = await stripe.checkout.sessions.create({
         mode: "subscription",
         success_url: billingUrl,
-        cancel_url: plansUrl,
+        cancel_url: billingUrl,
         payment_method_types: ["card"],
         billing_address_collection: "auto",
         customer_email: email,

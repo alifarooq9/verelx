@@ -36,7 +36,7 @@ export async function POST(request: Request) {
             session.subscription as string,
         );
 
-        const user = await prisma.user.update({
+        await prisma.user.update({
             where: {
                 id: session.metadata.userId,
             },
@@ -47,6 +47,7 @@ export async function POST(request: Request) {
                     subscription.current_period_end * 1000,
                 ),
                 stripeCustomerId: subscription.customer as string,
+                role: "MEMBER",
             },
         });
     }
@@ -62,6 +63,7 @@ export async function POST(request: Request) {
             },
             data: {
                 stripePriceId: subscription.items.data[0].price.id,
+                role: "MEMBER",
                 stripeCurrentPeriodEnd: new Date(
                     subscription.current_period_end * 1000,
                 ),

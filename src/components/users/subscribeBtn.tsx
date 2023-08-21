@@ -42,11 +42,6 @@ const SubscribeBtn = ({
     const handleOnClick = async () => {
         setLoading(true);
 
-        if (isSubscribed) {
-            router.push("/billing");
-            return;
-        }
-
         try {
             const handleFetch = await fetch("/api/stripe/manage-subscription", {
                 method: "POST",

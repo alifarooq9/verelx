@@ -19,7 +19,7 @@ type UserSidebarProps = {
     session: Session | null;
 };
 
-const links = [
+export const links = [
     {
         name: "Profile",
         href: "/profile",

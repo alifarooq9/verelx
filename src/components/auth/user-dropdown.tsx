@@ -38,7 +38,10 @@ const UserDropDown = ({ session }: Props) => {
                             alt={session?.user.name as string}
                         />
                         <AvatarFallback>
-                            {getInitials(session?.user.name as string)}
+                            {getInitials(
+                                (session?.user.name as string) ||
+                                    (session?.user?.email as string),
+                            )}
                         </AvatarFallback>
                     </Avatar>
                 </Button>

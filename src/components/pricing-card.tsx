@@ -27,11 +27,11 @@ const PricingCard = async ({
     return (
         <Card
             className={cn(
-                "max-w-xs flex flex-col",
+                "max-w-none md:max-w-xs flex flex-col",
                 variant === "highlighted" && "bg-muted",
             )}
         >
-            <CardHeader className="space-y-4">
+            <CardHeader>
                 <CardTitle className="font-semibold">{name}</CardTitle>
                 <CardDescription className="font-light">
                     {description}

@@ -16,13 +16,13 @@ const DrawerContent = React.forwardRef<
     React.ElementRef<typeof DrawerPrimitive.Content>,
     React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
 >(({ className, ...props }, ref) => (
-    <DrawerPrimitive.Portal className="w-screen">
-        <DrawerPrimitive.Overlay className="fixed inset-0 bg-black/40" />
+    <DrawerPrimitive.Portal>
+        <DrawerPrimitive.Overlay className="fixed inset-0 bg-muted/60 backdrop-blur-sm z-[200]" />
         <DrawerPrimitive.Content
             ref={ref}
             className={cn(
                 ((className =
-                    "bg-background z-[200] transform-gpu top-0 w-screen border border-muted p-3 flex flex-col rounded-t-lg mt-16 fixed bottom-0 left-0 right-0"),
+                    "bg-background z-[200] top-0 md:top-auto transform-gpu border border-muted p-3 flex flex-col rounded-t-lg mt-16 fixed bottom-0 left-0 right-0"),
                 className),
             )}
             {...props}

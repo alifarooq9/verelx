@@ -19,16 +19,14 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer";
+import PricingCard from "@/components/pricing-card";
+import { getAuthSession } from "@/lib/auth-options";
 
 const Billing = async () => {
-    const {
-        isCanceled,
-        isSubscribed,
-        stripeCustomerId,
-        stripeCurrentPeriodEnd,
-        stripeSubscriptionId,
-        stripePriceId,
-    } = await getUserSubscriptionPlan();
+    const session = await getAuthSession();
+
+    const { isCanceled, isSubscribed, stripeCurrentPeriodEnd, stripePriceId } =
+        await getUserSubscriptionPlan();
 
     const currentPlan = plans.find(
         (plan) => plan.stripePriceId === stripePriceId,
@@ -55,7 +53,7 @@ const Billing = async () => {
                         <CardDescription>
                             You&apos;re currently on{" "}
                             <span className="font-extrabold">
-                                {currentPlan?.name}
+                                {currentPlan?.name || "No"}
                             </span>{" "}
                             plan
                         </CardDescription>
@@ -79,23 +77,25 @@ const Billing = async () => {
                                 </span>
                             )}
                         </p>
-                        <p className="font-light text-muted-foreground">
-                            {isCanceled ? (
-                                <span>Your subscription will end on </span>
-                            ) : (
-                                <span>
-                                    Your subscription will be renewed on{" "}
-                                </span>
-                            )}
-                            {format(stripeCurrentPeriodEnd as Date, "PPP")}
-                        </p>
+                        {stripeCurrentPeriodEnd && (
+                            <p className="font-light text-muted-foreground">
+                                {isCanceled ? (
+                                    <span>Your subscription will end on </span>
+                                ) : (
+                                    <span>
+                                        Your subscription will be renewed on{" "}
+                                    </span>
+                                )}
+                                {format(stripeCurrentPeriodEnd as Date, "PPP")}
+                            </p>
+                        )}
                     </CardContent>
                     <CardFooter className="space-x-2">
                         {isSubscribed && <Button>Manage Subscription</Button>}
 
                         <DrawerRoot>
                             <DrawerTrigger asChild>
-                                <Button>
+                                <Button variant="secondary">
                                     {isSubscribed ? "Change Plan" : "Subscribe"}
                                 </Button>
                             </DrawerTrigger>
@@ -103,7 +103,20 @@ const Billing = async () => {
                             <DrawerContent>
                                 <DrawerIcon />
 
-                                <DrawerTitle>This is heading</DrawerTitle>
+                                <div className="grid grid-cols-1 max-w-5xl mx-auto mb-14 md:grid-cols-3 gap-5 overflow-y-auto">
+                                    {plans.map((plan) => (
+                                        <PricingCard
+                                            description={plan.description}
+                                            features={plan.features}
+                                            key={plan.name}
+                                            name={plan.name}
+                                            price={plan.price}
+                                            session={session}
+                                            stripePriceId={plan.stripePriceId}
+                                            variant={plan.variant}
+                                        />
+                                    ))}
+                                </div>
                             </DrawerContent>
                         </DrawerRoot>
                     </CardFooter>
