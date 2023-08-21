@@ -3,7 +3,7 @@ import AppearanceModesLoading from "@/components/appearance-modes-loading";
 
 const AppearanceLoading = () => {
     return (
-        <div className="flex-grow px-14 py-14">
+        <div className="flex-1 md:px-14 md:py-14">
             <div className="py-6 border-b">
                 <Skeleton className="w-48 h-8" />
             </div>

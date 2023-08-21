@@ -12,7 +12,7 @@ const AppearanceModes = () => {
     const { setTheme, theme } = useTheme();
 
     return (
-        <div className="flex mt-5 space-x-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 mt-5 gap-8">
             <button onClick={() => setTheme("dark")}>
                 <Image
                     src={darkModeImage}

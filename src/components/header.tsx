@@ -29,7 +29,7 @@ const Header = async ({ links }: HeaderProps) => {
 
     return (
         <header className="w-full sticky top-0 h-16 border-b flex items-center">
-            <div className="mx-auto w-full max-w-7xl px-4 flex justify-between items-center">
+            <div className="mx-auto w-full container flex justify-between items-center">
                 <section className="flex items-center">
                     <HeaderMenu links={links} />
 
