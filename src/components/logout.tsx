@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { create } from "zustand";
+import { useState } from "react";
+import { Loader2Icon } from "lucide-react";
 
 interface LogoutTriggerProps {
     children: React.ReactNode;
@@ -43,13 +45,19 @@ const LogoutTrigger = ({ children, asChild, ...props }: LogoutTriggerProps) => {
 const LogoutModel = () => {
     const { openModel, setOpenModel } = useLogoutModelStore();
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const handleLogout = async () => {
+        setLoading(true);
+
         try {
             await signOut({
                 callbackUrl: "/auth",
             });
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -70,10 +78,12 @@ const LogoutModel = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <Button
+                        disabled={loading}
                         onClick={handleLogout}
                         variant="destructive"
                         type="button"
                     >
+                        {loading && <Loader2Icon className="w-4 h-4 mr-2" />}
                         Log out
                     </Button>
                 </DialogFooter>
