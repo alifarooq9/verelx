@@ -29,7 +29,7 @@ const UsersLayout = async ({ children }: Props) => {
     return (
         <div className="min-h-[calc(100vh-6rem)]">
             <Header links={headerLinks} />
-            <div className="flex container mx-auto w-screen overflow-x-hidden">
+            <div className="flex container h-full mx-auto w-screen overflow-x-hidden">
                 <UserSidebar session={session} />
                 {children}
             </div>

@@ -43,7 +43,7 @@ const UserSidebar = ({ session }: UserSidebarProps) => {
     const pathname = usePathname();
 
     return (
-        <aside className="w-72 sticky hidden lg:block top-0 z-50 left-0 border-r p-6 h-full">
+        <aside className="w-72 sticky hidden lg:block top-0 z-50 left-0 p-6 h-full">
             <nav>
                 <ul className="space-y-1">
                     {links.map((link) => (
