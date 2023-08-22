@@ -1,10 +1,10 @@
-import Header from "@/components/header";
+import Header, { type LinkType } from "@/components/header";
 
 interface Props {
     children: React.ReactNode;
 }
 
-const headerLinks = [
+const headerLinks: LinkType[] = [
     {
         name: "Features",
         href: "/",
@@ -14,8 +14,9 @@ const headerLinks = [
         href: "/",
     },
     {
-        name: "Testimonials",
-        href: "/",
+        name: "Github",
+        href: "https://github.com/alidotm/verelx",
+        target: "_blank",
     },
 ];
 

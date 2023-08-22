@@ -1,11 +1,24 @@
 import { buttonVariants } from "@/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { plans } from "@/configs/plans";
 import { getAuthSession } from "@/lib/auth-options";
+import { getUserSubscriptionPlan } from "@/lib/subscriptions";
 import { cn } from "@/lib/utils";
+import { MaximizeIcon } from "lucide-react";
+import type { Session } from "next-auth";
 import Link from "next/link";
 import { Fragment } from "react";
 
 const DashboardPage = async () => {
     const session = await getAuthSession();
+    const { stripePriceId, isSubscribed } = await getUserSubscriptionPlan();
 
     return (
         <main className="flex-1 sm:px-10 py-6 sm:py-10">
@@ -16,8 +29,11 @@ const DashboardPage = async () => {
                 </p>
             </div>
             <section className="py-8">
-                {session?.user.role === "MEMBER" ? (
-                    <HaveMembership />
+                {isSubscribed ? (
+                    <HaveMembership
+                        session={session}
+                        stripePriceId={stripePriceId as string}
+                    />
                 ) : (
                     <DontHaveMembership />
                 )}
@@ -26,13 +42,57 @@ const DashboardPage = async () => {
     );
 };
 
-const HaveMembership = () => {
+type HaveMembershipProps = {
+    session: Session | null;
+    stripePriceId: string;
+};
+
+const HaveMembership = async ({
+    session,
+    stripePriceId,
+}: HaveMembershipProps) => {
+    const currentPlan = plans.find(
+        (plan) => plan.stripePriceId === stripePriceId,
+    );
+
     return (
         <Fragment>
-            <h2 className="font-medium">Membership</h2>
-            <p className="text-muted-foreground text-sm font-light">
-                Verelx gym membership
-            </p>
+            <section>
+                <Card className="max-w-md">
+                    <CardHeader>
+                        <CardTitle className="text-xl font-semibold">
+                            Membership Card
+                        </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="my-3">
+                        <h4 className="font-bold text-3xl">
+                            {currentPlan?.name} Plan
+                        </h4>
+                        <CardDescription className="text-base">
+                            You&apos;re currently on{" "}
+                            <span className="font-extrabold">
+                                {currentPlan?.name || "No"}
+                            </span>{" "}
+                            plan
+                        </CardDescription>
+                    </CardContent>
+
+                    <CardFooter className="flex justify-between items-center">
+                        <h5 className="font-semibold text-muted-foreground">
+                            {session?.user.name}
+                        </h5>
+
+                        <div className="flex items-center ">
+                            <MaximizeIcon
+                                className="w-4 h-4 mr-2"
+                                strokeWidth={2}
+                            />
+                            <span className="font-bold text-lg">Verelx</span>
+                        </div>
+                    </CardFooter>
+                </Card>
+            </section>
         </Fragment>
     );
 };
