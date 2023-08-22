@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header, { LinkType } from "@/components/header";
 import UserSidebar from "@/components/sidebar";
 import { getAuthSession } from "@/lib/auth-options";
 import { redirectProtectedRoutes } from "@/lib/redirect-routes";
@@ -8,10 +8,11 @@ interface Props {
     children: React.ReactNode;
 }
 
-const headerLinks = [
+const headerLinks: LinkType[] = [
     {
-        name: "Features",
-        href: "/",
+        name: "Github",
+        href: "https://github.com/alidotm/verelx",
+        target: "_blank",
     },
 ];
 

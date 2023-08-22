@@ -1,12 +1,11 @@
 import { getAuthSession } from "@/lib/auth-options";
 import {
     Card,
-    CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { UpdateNameForm } from "@/components/setting-forms";
 
 const SettingsPage = async () => {
     const session = await getAuthSession();
@@ -20,7 +19,7 @@ const SettingsPage = async () => {
                 </p>
             </div>
             <section className="py-8">
-                <Card>
+                <Card className="">
                     <CardHeader>
                         <CardTitle className="text-xl font-semibold">
                             Your Name
@@ -30,12 +29,7 @@ const SettingsPage = async () => {
                             with.
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <p>Card Content</p>
-                    </CardContent>
-                    <CardFooter>
-                        <p>Card Footer</p>
-                    </CardFooter>
+                    <UpdateNameForm name={session?.user.name as string} />
                 </Card>
             </section>
         </main>

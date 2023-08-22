@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AlignJustifyIcon, MaximizeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Fragment } from "react";
 import UserDropDown from "@/components/user-dropdown";
 import { getAuthSession } from "@/lib/auth-options";
@@ -15,9 +15,10 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type LinkType = {
+export type LinkType = {
     name: string;
     href: string;
+    target?: "_blank";
 };
 
 type HeaderProps = {
@@ -45,6 +46,7 @@ const Header = async ({ links }: HeaderProps) => {
                         {links.map((link) => (
                             <li key={link.href}>
                                 <Link
+                                    target={link.target}
                                     href={link.href}
                                     className={cn(
                                         buttonVariants({
