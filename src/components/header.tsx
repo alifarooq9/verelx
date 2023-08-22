@@ -73,13 +73,14 @@ const Header = async ({ links }: HeaderProps) => {
                                     buttonVariants({
                                         variant: "secondary",
                                         size: "sm",
+                                        className: "hidden md:flex",
                                     }),
                                 )}
                             >
                                 Login
                             </Link>
                             <Link
-                                href="/auth "
+                                href="/auth"
                                 className={cn(
                                     buttonVariants({
                                         variant: "default",
@@ -87,7 +88,7 @@ const Header = async ({ links }: HeaderProps) => {
                                     }),
                                 )}
                             >
-                                Get Started For Free
+                                Get Started
                             </Link>
                         </Fragment>
                     )}

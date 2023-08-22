@@ -5,10 +5,12 @@ import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { LogoutModel } from "@/components/logout";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-    title: "Verelx",
-    description: "In development | Verelx",
+    title: "Verelx | Made by Ali",
+    description:
+        "Gym management software with Next.js 13 Server Components, Prisma, Typescript, Stripe, Next-auth, Vaul and Shadcn/ui | made by Ali",
 };
 
 const font = localFont({
@@ -69,6 +71,7 @@ export default async function RootLayout({
                 <Providers>
                     <LogoutModel />
                     {children}
+                    <Footer />
                     <Toaster />
                 </Providers>
             </body>

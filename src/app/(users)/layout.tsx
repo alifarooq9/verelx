@@ -14,6 +14,11 @@ const headerLinks: LinkType[] = [
         href: "https://github.com/alidotm/verelx",
         target: "_blank",
     },
+    {
+        name: "My website",
+        href: " https://www.alidotm.me/",
+        target: "_blank",
+    },
 ];
 
 const UsersLayout = async ({ children }: Props) => {
@@ -22,13 +27,13 @@ const UsersLayout = async ({ children }: Props) => {
     await redirectProtectedRoutes({ session, url: "/auth" });
 
     return (
-        <Fragment>
+        <div className="min-h-[calc(100vh-6rem)]">
             <Header links={headerLinks} />
-            <div className="h-screen flex container mx-auto w-screen overflow-x-hidden">
+            <div className="flex container mx-auto w-screen overflow-x-hidden">
                 <UserSidebar session={session} />
                 {children}
             </div>
-        </Fragment>
+        </div>
     );
 };
 
