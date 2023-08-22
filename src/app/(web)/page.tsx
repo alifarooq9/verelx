@@ -11,7 +11,8 @@ const Home = () => {
             >
                 <div className="flex flex-col items-center space-y-6">
                     <Link
-                        href="/"
+                        href="https://twitter.com/heyimalim"
+                        target="_blank"
                         className="bg-accent text-sm sm:text-base text-center rounded-lg w-fit px-4 py-1 ring-style"
                     >
                         <strong>
